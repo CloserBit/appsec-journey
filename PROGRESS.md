@@ -31,9 +31,9 @@
 - ✅ SAST vs DAST: зоны видимости и слепые пятна
 - ✅ Рамка Secure SDLC + shift-left, конспект `notes/00-secure-sdlc.md`
 - ✅ 🚩 Находка: password + totpSecret в payload (CWE-522 / CWE-200) → write-up TODO
-- 🔄 Атака `alg:none` через jwt_tool + Repeater
+- ✅ Атака `alg:none` через jwt_tool + Repeater
 - ⏭ Атака RS256→HS256 confusion
-- ⏭ Write-up по JWT-находке
+- ✅ Write-up по JWT-находке
 
 ---
 
