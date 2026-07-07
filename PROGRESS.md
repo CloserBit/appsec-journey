@@ -36,5 +36,6 @@
 - ✅ Root cause обеих атак: сервер доверяет alg → фикс allowlist algorithms=["RS256"]
 - ✅ Цепочка верификации JWT (6 шагов) → notes/02-JWT.md
 - ✅ Write-up по обеим атакам (jwt-alg-none.md → расширить до signature-bypass)
-- ⬜ REST, идемпотентность, версионирование; базово OAuth2/OIDC
+- ✅ REST-механика: REST/ресурсы/методы, IDOR (root: авторизация на уровне объекта), идемпотентность (POST replay → idempotency-key), версионирование (забытая v1) → notes/03-rest-api.md
+- 🔄 OAuth2/OIDC — базово
 - ⬜ Мини-проект: скрипт login → перебор id (заготовка под IDOR)
