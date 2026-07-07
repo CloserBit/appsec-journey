@@ -8,7 +8,7 @@
 ---
 
 ## Текущая позиция
-**Фаза 1** (фундамент) · **Неделя 2** (JWT) · сейчас: первая атака на токен (`alg:none`)
+**Фаза 1** (фундамент) · **Неделя 2** (JWT) · закрыты alg:none + RS256→HS256 confusion · осталось: REST/OAuth2 базово, мини-проект IDOR
 
 ---
 
@@ -32,13 +32,9 @@
 - ✅ Рамка Secure SDLC + shift-left, конспект `notes/00-secure-sdlc.md`
 - ✅ 🚩 Находка: password + totpSecret в payload (CWE-522 / CWE-200) → write-up TODO
 - ✅ Атака `alg:none` через jwt_tool + Repeater
-- ⏭ Атака RS256→HS256 confusion
-- ✅ Write-up по JWT-находке
-
----
-
-## Затыки / вопросы к разбору
-- (пусто — вписывай сюда, что осталось непонятным)
-
-## Идеи для портфеля (writeups)
-- JWT: sensitive data in payload (password/totpSecret) — CWE-522
+- ✅ Атака RS256→HS256 confusion — эксплуатирована на Juice Shop end-to-end (JWKS → JWK→PEM → jwt_tool -X k → data.role:admin → 200 /rest/admin/application-configuration)
+- ✅ Root cause обеих атак: сервер доверяет alg → фикс allowlist algorithms=["RS256"]
+- ✅ Цепочка верификации JWT (6 шагов) → notes/02-JWT.md
+- ✅ Write-up по обеим атакам (jwt-alg-none.md → расширить до signature-bypass)
+- ⬜ REST, идемпотентность, версионирование; базово OAuth2/OIDC
+- ⬜ Мини-проект: скрипт login → перебор id (заготовка под IDOR)
