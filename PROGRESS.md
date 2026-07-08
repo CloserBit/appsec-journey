@@ -8,7 +8,7 @@
 ---
 
 ## Текущая позиция
-**Фаза 1** (фундамент) · **Неделя 2** (JWT) · закрыты alg:none + RS256→HS256 confusion · осталось: REST/OAuth2 базово, мини-проект IDOR
+**Фаза 1** (фундамент) · **Неделя 2** теория закрыта (JWT+API+OAuth), остался мини-проект → потом экзамен Фазы 1.
 
 ---
 
@@ -37,5 +37,7 @@
 - ✅ Цепочка верификации JWT (6 шагов) → notes/02-JWT.md
 - ✅ Write-up по обеим атакам (jwt-alg-none.md → расширить до signature-bypass)
 - ✅ REST-механика: REST/ресурсы/методы, IDOR (root: авторизация на уровне объекта), идемпотентность (POST replay → idempotency-key), версионирование (забытая v1) → notes/03-rest-api.md
-- 🔄 OAuth2/OIDC — базово
+- ✅ OAuth2/OIDC: делегированный доступ, access vs ID token (aud);
+      атаки: redirect_uri (→allowlist exact match), нет state (→login CSRF), путаница токенов → notes/04-oauth-oidc.md
+- ✅ Сквозной вывод: JWT alg / IDOR id / redirect_uri — один корень (доверие вводу) → одна защита (allowlist/серверная сверка)
 - ⬜ Мини-проект: скрипт login → перебор id (заготовка под IDOR)
