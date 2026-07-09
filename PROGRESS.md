@@ -40,4 +40,6 @@
 - ✅ OAuth2/OIDC: делегированный доступ, access vs ID token (aud);
       атаки: redirect_uri (→allowlist exact match), нет state (→login CSRF), путаница токенов → notes/04-oauth-oidc.md
 - ✅ Сквозной вывод: JWT alg / IDOR id / redirect_uri — один корень (доверие вводу) → одна защита (allowlist/серверная сверка)
-- ⬜ Мини-проект: скрипт login → перебор id (заготовка под IDOR)
+- ✅ Мини-проект: scripts/idor_baskets.py — login → перебор basket/{id}.
+      Подтверждён IDOR на Juice Shop (чужие корзины доступны).
+      Урок триажа: скрипт даёт кандидатов (200+тело), верификацию «своё/чужое» делает человек.

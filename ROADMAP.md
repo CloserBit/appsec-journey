@@ -23,7 +23,7 @@
 - ✅ SAST vs DAST, рамка Secure SDLC + shift-left
 - ✅ Атаки на JWT: `alg:none`, RS256→HS256 confusion
 - ✅ REST, идемпотентность, версионирование; базово OAuth2/OIDC
-- ⬜ Мини-проект: скрипт login → перебор `id` (заготовка под IDOR)
+- ✅ Мини-проект: скрипт login → перебор `id` (заготовка под IDOR)
 - ⬜ 🎫 Экзамен Фазы 1
 
 ## Фаза 2 — Веб-уязвимости (OWASP Top 10 + CWE) + secure coding
