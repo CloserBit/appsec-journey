@@ -24,7 +24,7 @@
 - ✅ Атаки на JWT: `alg:none`, RS256→HS256 confusion
 - ✅ REST, идемпотентность, версионирование; базово OAuth2/OIDC
 - ✅ Мини-проект: скрипт login → перебор `id` (заготовка под IDOR)
-- ⬜ 🎫 Экзамен Фазы 1
+- ✅ 🎫 Экзамен Фазы 1 (4/5)
 
 ## Фаза 2 — Веб-уязвимости (OWASP Top 10 + CWE) + secure coding
 - ⬜ Неделя 3 — Broken Access Control / IDOR / SSRF (A01)
