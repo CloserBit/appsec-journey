@@ -8,7 +8,7 @@
 ---
 
 ## Текущая позиция
-**Фаза 2 · Неделя 3** — Broken Access Control (A01). Теория закрыта, дальше практика на лабах.
+**Фаза 2 · Неделя 3 ЗАКРЫТА** (BAC теория + 5 лаб PortSwigger). Дальше по плану: STLC, затем Неделя 4 (SQLi).
 
 ---
 
@@ -55,5 +55,9 @@
 - ✅ IDOR углублённо (чтение vs запись, объектная vs ролевая проверка)
 - ✅ Эскалация привилегий: горизонтальная / вертикальная
 - ✅ SSRF: механика (сервер как прокси в периметр), метаданные 169.254.169.254, защита (allowlist по финальному IP, не по строке URL), blind SSRF, detection
-- ✅ Асимметрия blocklist/allowlist (deny by default) — на живом примере SSRF
-- ⬜ Практика: лабы PortSwigger (Access Control + SSRF)
+- ✅ PortSwigger #1: Unprotected admin functionality (robots.txt recon) — solved
+- ✅ PortSwigger #2: Unprotected admin functionality, unpredictable URL (JS recon) — solved
+- ✅ PortSwigger #3: User role controlled by request parameter (роль admin=true, вертикаль) — solved
+- ✅ PortSwigger #4: User ID controlled by request parameter (IDOR id=wiener→carlos, горизонталь) — solved
+- ✅ Различие руками: IDOR (принадлежность объекта, горизонталь) vs role-подмена (роль, вертикаль)
+- ✅ PortSwigger #5: Basic SSRF against local server (stockApi → http://localhost/admin/delete) — solved

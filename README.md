@@ -38,7 +38,7 @@ BSIMM: модель зрелости (обзорно)
 
 ## Прогресс по фазам
 - [x] Фаза 0 — окружение
-- [ ] Фаза 1 — фундамент: web + HTTP + API/auth  *(HTTP-часть закрыта)*
+- [x] Фаза 1 — фундамент: web + HTTP + API/auth  *(HTTP-часть закрыта)*
 - [ ] Фаза 2 — веб-уязвимости (OWASP Top 10 + CWE) + secure coding
 - [ ] Фаза 3 — безопасность API
 - [ ] Фаза 4 — инструменты AppSec, SSDLC/DevSecOps, стандарты (OWASP/MITRE/BSIMM)
