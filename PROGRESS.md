@@ -61,3 +61,4 @@
 - ✅ PortSwigger #4: User ID controlled by request parameter (IDOR id=wiener→carlos, горизонталь) — solved
 - ✅ Различие руками: IDOR (принадлежность объекта, горизонталь) vs role-подмена (роль, вертикаль)
 - ✅ PortSwigger #5: Basic SSRF against local server (stockApi → http://localhost/admin/delete) — solved
+- ✅ PortSwigger SQLi: WHERE hidden data, login bypass (administrator'--), determine columns (UNION SELECT NULL×3) — solved
