@@ -66,3 +66,4 @@
 - ✅ PortSwigger SQLi UNION: retrieving data from other tables (вытащил administrator creds, вход) — solved. Первая кража данных через SQLi.
 - ✅ PortSwigger SQLi: Blind boolean (conditional responses) — пароль admin через Intruder Cluster bomb. Освоен Intruder (payload positions, sets, Grep Match).
 - ✅ PortSwigger SQLi: Blind time-based (time delays + retrieval) — пароль 20 симв. через pg_sleep + Cluster bomb по колонке времени. Solved.
+- ✅ Write-up по SQLi → writeups/sqli.md (виды, PoC, защита слоями, detection через data-flow). Третий write-up портфеля.
