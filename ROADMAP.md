@@ -28,7 +28,7 @@
 
 ## Фаза 2 — Веб-уязвимости (OWASP Top 10 + CWE) + secure coding
 - ✅ Неделя 3 — Broken Access Control / IDOR / SSRF (A01)
-- ⬜ Неделя 4 — SQL Injection (A05)
+- ✅ Неделя 4 — SQL Injection (A05)
 - ⬜ Неделя 5 — Command injection + прочие + intro XSS
 - ⬜ Неделя 6 — XSS: reflected/stored/DOM + CSP
 - ⬜ Неделя 7 — Атаки на auth/сессии (A07) + CSRF + десериализация
