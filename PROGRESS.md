@@ -67,3 +67,7 @@
 - ✅ PortSwigger SQLi: Blind boolean (conditional responses) — пароль admin через Intruder Cluster bomb. Освоен Intruder (payload positions, sets, Grep Match).
 - ✅ PortSwigger SQLi: Blind time-based (time delays + retrieval) — пароль 20 симв. через pg_sleep + Cluster bomb по колонке времени. Solved.
 - ✅ Write-up по SQLi → writeups/sqli.md (виды, PoC, защита слоями, detection через data-flow). Третий write-up портфеля.
+- ✅ PortSwigger: OS command injection simple case (;whoami в storeId/productId → RCE) — solved
+- ✅ PortSwigger: Reflected XSS into HTML context, nothing encoded (<script>alert(1)</script>) — solved. Первый XSS.
+- ✅ PortSwigger: Stored XSS into HTML context, nothing encoded — solved. Разница с reflected: массовость + не нужно действие жертвы.
+- ✅ PortSwigger: DOM XSS in document.write via location.search ("><script>alert(1)</script>) — solved. Три типа XSS руками.
