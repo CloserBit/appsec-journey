@@ -8,7 +8,7 @@
 ---
 
 ## Текущая позиция
-**Фаза 2 · Неделя 6 — XSS вглубь.** Закрыты: Недели 3 (BAC), 4 (SQLi), 5 (cmd injection + intro XSS: 3 типа руками). Дальше: XSS вглубь → mock-интервью → резюме.
+**Фаза 2 · Неделя 6 (XSS вглубь) — ~80%.** Закрыто: impact/HttpOnly, обход фильтров, CSP/unsafe-inline, сложная лаба (body+onresize+iframe). Осталось: защита XSS целиком + write-up. Дальше — mock-интервью → резюме.
 
 ---
 
@@ -71,3 +71,4 @@
 - ✅ PortSwigger: Reflected XSS into HTML context, nothing encoded (<script>alert(1)</script>) — solved. Первый XSS.
 - ✅ PortSwigger: Stored XSS into HTML context, nothing encoded — solved. Разница с reflected: массовость + не нужно действие жертвы.
 - ✅ PortSwigger: DOM XSS in document.write via location.search ("><script>alert(1)</script>) — solved. Три типа XSS руками.
+- ✅ PortSwigger: Reflected XSS, most tags/attributes blocked — solved. Цепочка: Intruder-перебор тегов+событий → нашёл body+onresize → доставка через iframe (onload меняет размер → resize → alert) → exploit server. Сложная лаба, продвинутый навык.
