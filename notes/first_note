@@ -1,9 +1,0 @@
-sudo usermod -aG docker $USER ---> добавление  пользователя в группу docker снимает обязательство запускать команды с sudo
-
-Burp = HTTP-прокси, Firefox хардкодит localhost как «не проксировать» → заходим по IP(172.17.0.1)!!!
-
-docker run -d -p 0.0.0.0:3000:3000 bkimminich/juice-shop --> запуск Juice Shop в Docker контейнере
-
-python3 -m venv venv
-source venv/bin/activate --> активация виртуального окружения
-pip install -r requirements.txt --> установка зависимостей

@@ -24,7 +24,6 @@ BSIMM: модель зрелости (обзорно)
 
 ## Структура
 - `notes/`      — конспекты по темам (HTTP, OWASP Top 10, API Security и т.д.)
-- `notes/standards/` — разбор OWASP / MITRE / BSIMM
 - `code/`       — secure coding: пары «уязвимый ↔ исправленный» на Python
 - `scripts/`    — питон-автоматизации для тестов
 - `writeups/`   — разборы уязвимостей (шаги, impact, CWE, fix)
@@ -32,14 +31,15 @@ BSIMM: модель зрелости (обзорно)
 
 ## Сквозные треки (идут через все фазы)
 - [x] Secure SDLC — где в цикле рождается и где дешевле всего ловится каждая уязвимость
-- [ ] CWE-маппинг — у каждой находки проставлен CWE-ID (цель: покрыть CWE Top 25)
+- [x] CWE-маппинг — у каждой находки проставлен CWE-ID (цель: покрыть CWE Top 25)
 - [ ] Secure coding (Python) — vulnerable + fixed на каждую уязвимость
 - [ ] Стандарты — ASVS/Cheat Sheets как рабочие справочники, обзор MITRE/BSIMM
 
 ## Прогресс по фазам
 - [x] Фаза 0 — окружение
 - [x] Фаза 1 — фундамент: web + HTTP + API/auth  *(HTTP-часть закрыта)*
-- [ ] Фаза 2 — веб-уязвимости (OWASP Top 10 + CWE) + secure coding
+- [~] Фаза 2 — веб-уязвимости (OWASP Top 10): ✅ BAC/IDOR, ✅ SQLi, ✅ Command injection,
+      ✅ XSS (reflected/stored/DOM). 4 write-up, ~14 лаб PortSwigger
 - [ ] Фаза 3 — безопасность API
 - [ ] Фаза 4 — инструменты AppSec, SSDLC/DevSecOps, стандарты (OWASP/MITRE/BSIMM)
 - [ ] Фаза 5 — пентест-практика и портфель
