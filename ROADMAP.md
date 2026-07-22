@@ -31,7 +31,7 @@
 - ✅ Неделя 4 — SQL Injection (A05)
 - ✅ Неделя 5 — Command injection + прочие + intro XSS
 - ✅ Неделя 6 — XSS: reflected/stored/DOM + CSP
-- ⬜ Неделя 7 — Атаки на auth/сессии (A07) + CSRF + десериализация
+- 🔄 Неделя 7 — Атаки на auth/сессии (A07) + CSRF + десериализация
 - ⬜ Неделя 8 — Security Misconfiguration (A02) + Crypto Failures (A04) + Insecure Design + intro threat modeling (STRIDE)
 - ⬜ 🎫 Экзамен Фазы 2
 - ⬜ Сквозное: на каждую уязвимость — CWE-ID + vulnerable/fixed код
