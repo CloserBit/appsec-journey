@@ -73,3 +73,5 @@
 - ✅ PortSwigger: DOM XSS in document.write via location.search ("><script>alert(1)</script>) — solved. Три типа XSS руками.
 - ✅ PortSwigger: Reflected XSS, most tags/attributes blocked — solved. Цепочка: Intruder-перебор тегов+событий → нашёл body+onresize → доставка через iframe (onload меняет размер → resize → alert) → exploit server. Сложная лаба, продвинутый навык.
 - ✅ PortSwigger: Reflected XSS with SVG markup (animatetransform onbegin, адаптация вектора под фильтр) — solved
+- ✅ PortSwigger: CSRF token duplicated in cookie (навязал csrf в cookie через CRLF + форму) — solved
+- ✅ PortSwigger: CSRF token not tied to session (свой валидный свежий токен в форму) — solved
