@@ -39,7 +39,7 @@ BSIMM: модель зрелости (обзорно)
 - [x] Фаза 0 — окружение
 - [x] Фаза 1 — фундамент: web + HTTP + API/auth  *(HTTP-часть закрыта)*
 - [~] Фаза 2 — веб-уязвимости (OWASP Top 10): ✅ BAC/IDOR, ✅ SQLi, ✅ Command injection,
-      ✅ XSS (reflected/stored/DOM). 4 write-up, ~14 лаб PortSwigger
+      ✅ XSS (reflected/stored/DOM). 4 write-up, ~33 лаб PortSwigger
 - [ ] Фаза 3 — безопасность API
 - [ ] Фаза 4 — инструменты AppSec, SSDLC/DevSecOps, стандарты (OWASP/MITRE/BSIMM)
 - [ ] Фаза 5 — пентест-практика и портфель

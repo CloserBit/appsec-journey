@@ -75,3 +75,8 @@
 - ✅ PortSwigger: Reflected XSS with SVG markup (animatetransform onbegin, адаптация вектора под фильтр) — solved
 - ✅ PortSwigger: CSRF token duplicated in cookie (навязал csrf в cookie через CRLF + форму) — solved
 - ✅ PortSwigger: CSRF token not tied to session (свой валидный свежий токен в форму) — solved
+- ✅ PortSwigger: Username enumeration via different responses (Intruder: логин по разнице ответа/длины → брутфорс пароля) — solved
+- ✅ PortSwigger: 2FA simple bypass (переход на /my-account минуя ввод кода — пост-2FA страница не защищена) — solved
+- ✅ PortSwigger: 2FA broken logic (подмена username wiener→carlos + брутфорс кода → вход под carlos) — solved. Цепочка: логика + брутфорс.
+- ✅ PortSwigger: Broken brute-force protection IP block (Pitchfork чередование wiener/carlos + resource pool 1 concurrent) — solved. Урок: порядок-зависимые атаки требуют 1 поток.
+- ✅ PortSwigger: Password reset broken logic (подмена username в финальном запросе → смена пароля carlos) — solved
