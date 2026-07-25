@@ -80,3 +80,5 @@
 - ✅ PortSwigger: 2FA broken logic (подмена username wiener→carlos + брутфорс кода → вход под carlos) — solved. Цепочка: логика + брутфорс.
 - ✅ PortSwigger: Broken brute-force protection IP block (Pitchfork чередование wiener/carlos + resource pool 1 concurrent) — solved. Урок: порядок-зависимые атаки требуют 1 поток.
 - ✅ PortSwigger: Password reset broken logic (подмена username в финальном запросе → смена пароля carlos) — solved
+- ✅ PortSwigger: Modifying serialized objects (b:0→b:1 admin в PHP-объекте cookie) — solved. Первая десериализация.
+- ✅ PortSwigger: Modifying serialized data types (i:0 + type juggling обход == токена + username=administrator) — solved. PHP loose comparison.
