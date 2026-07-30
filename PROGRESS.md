@@ -8,7 +8,26 @@
 ---
 
 ## Текущая позиция
-**Фаза 2 · Неделя 6 (XSS вглубь) — ~80%.** Закрыто: impact/HttpOnly, обход фильтров, CSP/unsafe-inline, сложная лаба (body+onresize+iframe). Осталось: защита XSS целиком + write-up. Дальше — mock-интервью → резюме.
+**Фаза 2 почти закрыта + старт практики на живых целях (THM).**
+Закрыто: BAC/IDOR, SQLi, command injection, XSS (полностью), CSRF, auth failures,
+десериализация (базовая). Пройден mock-интервью (вердикт «подавать»), собраны 3 резюме
+под разные вакансии, отклики отправлены (МТС и др.).
+🔄 Сейчас: TryHackMe Jr Penetration Tester — recon-навык на неназванных целях
+(2 машины решены самостоятельно) + добор теории по плану.
+Осталось до закрытия Фазы 2: deserialization RCE (gadget chains),
+Неделя 8 (misconfiguration / crypto failures / insecure design + STRIDE), экзамен Фазы 2.
+
+---
+
+## Вехи (быстрый обзор)
+- ✅ Экзамен Фазы 1 — 4/5
+- ✅ Костяк веб-уязвимостей руками: BAC, SQLi, cmd injection, XSS, CSRF, auth, десериализация
+- ✅ ~29 лабораторных PortSwigger
+- ✅ 4 write-up (JWT×2, SQLi, XSS) + IDOR-скрипт на Python
+- ✅ Mock-интервью пройден -> вердикт «подавать»
+- ✅ 3 резюме (МТС-стажёр / DevSecOps / AppSec Engineer) + сопроводительное
+- ✅ Старт практики на живых целях: TryHackMe (12 комнат, 2 самостоятельные машины)
+- ✅ recon-чеклист + трекеры лаб (labs/)
 
 ---
 
@@ -16,69 +35,132 @@
 
 ### Фаза 0 — Окружение
 - ✅ Kali VM, Docker, Juice Shop, аккаунты (PortSwigger/THM/HTB)
-- ✅ Репозиторий `appsec-journey`, структура папок
+- ✅ Репозиторий appsec-journey, структура папок
 - ✅ Burp перехватывает трафик (урок: заходить по IP, не localhost; HTTP-прокси, не SOCKS)
 - ✅ Чек-поинт: перехват + повтор запроса через Repeater
 
 ### Фаза 1 · Неделя 1 — HTTP-механика
 - ✅ Запрос/ответ, методы, статус-коды, заголовки
-- ✅ Cookie vs токены, жизненный цикл JWT снаружи (выдача → `Authorization: Bearer`)
-- ✅ Конспект `notes/01-http.md`
+- ✅ Cookie vs токены, жизненный цикл JWT снаружи (выдача -> Authorization: Bearer)
+- ✅ Конспект notes/01-http.md
 
-### Фаза 1 · Неделя 2 — JWT (в процессе)
-- ✅ Анатомия JWT: header.payload.signature, Base64 ≠ шифрование
+### Фаза 1 · Неделя 2 — JWT
+- ✅ Анатомия JWT: header.payload.signature, Base64 != шифрование
 - ✅ Подпись и секрет: один серверный секрет, сервер не хранит токены (сверяет на лету)
 - ✅ SAST vs DAST: зоны видимости и слепые пятна
-- ✅ Рамка Secure SDLC + shift-left, конспект `notes/00-secure-sdlc.md`
-- ✅ 🚩 Находка: password + totpSecret в payload (CWE-522 / CWE-200) → write-up TODO
-- ✅ Атака `alg:none` через jwt_tool + Repeater
-- ✅ Атака RS256→HS256 confusion — эксплуатирована на Juice Shop end-to-end (JWKS → JWK→PEM → jwt_tool -X k → data.role:admin → 200 /rest/admin/application-configuration)
-- ✅ Root cause обеих атак: сервер доверяет alg → фикс allowlist algorithms=["RS256"]
-- ✅ Цепочка верификации JWT (6 шагов) → notes/02-JWT.md
-- ✅ Write-up по обеим атакам (jwt-alg-none.md → расширить до signature-bypass)
-- ✅ REST-механика: REST/ресурсы/методы, IDOR (root: авторизация на уровне объекта), идемпотентность (POST replay → idempotency-key), версионирование (забытая v1) → notes/03-rest-api.md
-- ✅ OAuth2/OIDC: делегированный доступ, access vs ID token (aud);
-      атаки: redirect_uri (→allowlist exact match), нет state (→login CSRF), путаница токенов → notes/04-oauth-oidc.md
-- ✅ Сквозной вывод: JWT alg / IDOR id / redirect_uri — один корень (доверие вводу) → одна защита (allowlist/серверная сверка)
-- ✅ Мини-проект: scripts/idor_baskets.py — login → перебор basket/{id}.
-      Подтверждён IDOR на Juice Shop (чужие корзины доступны).
-      Урок триажа: скрипт даёт кандидатов (200+тело), верификацию «своё/чужое» делает человек.
+- ✅ Рамка Secure SDLC + shift-left, конспект notes/00-secure-sdlc.md
+- ✅ Находка: password + totpSecret в payload (CWE-522 / CWE-200)
+- ✅ Атака alg:none через jwt_tool + Repeater
+- ✅ Атака RS256->HS256 confusion — эксплуатирована на Juice Shop end-to-end
+- ✅ Root cause обеих атак: сервер доверяет alg -> фикс allowlist algorithms=["RS256"]
+- ✅ Цепочка верификации JWT (6 шагов) -> notes/02-JWT.md
+- ✅ Write-up по обеим атакам (jwt-signature-bypass.md, jwt-sensitive-data.md)
+- ✅ REST-механика: IDOR, идемпотентность, версионирование -> notes/03-rest-api.md
+- ✅ OAuth2/OIDC: делегированный доступ, access vs ID token; атаки redirect_uri, нет state -> notes/04-oauth-oidc.md
+- ✅ Сквозной вывод: JWT alg / IDOR id / redirect_uri — один корень (доверие вводу)
+- ✅ Мини-проект scripts/idor_baskets.py — подтверждён IDOR на Juice Shop. Урок триажа: скрипт даёт кандидатов, верификацию делает человек.
 
 ### Фаза 1 · Экзамен
 - ✅ Экзамен Фазы 1 сдан (15 вопросов + разбор кода). Оценка 4/5.
-- ✅ Добиты пробелы: HTTP-коды (401/403/404/400), cookie(stateful) vs JWT(stateless),
-      терминология подпись/проверка/кодирование, state в OAuth.
-- ✅ Ключевой узел confusion закрыт: stateless → нет памяти о токене → доверие к alg.
+- ✅ Добиты пробелы: HTTP-коды (401/403/404/400), cookie(stateful) vs JWT(stateless), терминология, state в OAuth.
+- ✅ Ключевой узел confusion: stateless -> нет памяти о токене -> доверие к alg.
 
 ### Фаза 2 · Неделя 3 — Broken Access Control / IDOR / SSRF
-- ✅ BAC как категория: 4 подтипа (объектный/функциональный/параметр/обход метода), корень — сломанная авторизация, deny by default
+- ✅ BAC как категория: 4 подтипа, корень — сломанная авторизация, deny by default
 - ✅ IDOR углублённо (чтение vs запись, объектная vs ролевая проверка)
 - ✅ Эскалация привилегий: горизонтальная / вертикальная
-- ✅ SSRF: механика (сервер как прокси в периметр), метаданные 169.254.169.254, защита (allowlist по финальному IP, не по строке URL), blind SSRF, detection
-- ✅ PortSwigger #1: Unprotected admin functionality (robots.txt recon) — solved
-- ✅ PortSwigger #2: Unprotected admin functionality, unpredictable URL (JS recon) — solved
-- ✅ PortSwigger #3: User role controlled by request parameter (роль admin=true, вертикаль) — solved
-- ✅ PortSwigger #4: User ID controlled by request parameter (IDOR id=wiener→carlos, горизонталь) — solved
-- ✅ Различие руками: IDOR (принадлежность объекта, горизонталь) vs role-подмена (роль, вертикаль)
-- ✅ PortSwigger #5: Basic SSRF against local server (stockApi → http://localhost/admin/delete) — solved
-- ✅ PortSwigger SQLi: WHERE hidden data, login bypass (administrator'--), determine columns (UNION SELECT NULL×3) — solved
-- ✅ PortSwigger SQLi UNION: finding column with text (3 столбца, текстовый — 2-й) — solved
-- ✅ PortSwigger SQLi UNION: retrieving data from other tables (вытащил administrator creds, вход) — solved. Первая кража данных через SQLi.
-- ✅ PortSwigger SQLi: Blind boolean (conditional responses) — пароль admin через Intruder Cluster bomb. Освоен Intruder (payload positions, sets, Grep Match).
-- ✅ PortSwigger SQLi: Blind time-based (time delays + retrieval) — пароль 20 симв. через pg_sleep + Cluster bomb по колонке времени. Solved.
-- ✅ Write-up по SQLi → writeups/sqli.md (виды, PoC, защита слоями, detection через data-flow). Третий write-up портфеля.
-- ✅ PortSwigger: OS command injection simple case (;whoami в storeId/productId → RCE) — solved
-- ✅ PortSwigger: Reflected XSS into HTML context, nothing encoded (<script>alert(1)</script>) — solved. Первый XSS.
-- ✅ PortSwigger: Stored XSS into HTML context, nothing encoded — solved. Разница с reflected: массовость + не нужно действие жертвы.
-- ✅ PortSwigger: DOM XSS in document.write via location.search ("><script>alert(1)</script>) — solved. Три типа XSS руками.
-- ✅ PortSwigger: Reflected XSS, most tags/attributes blocked — solved. Цепочка: Intruder-перебор тегов+событий → нашёл body+onresize → доставка через iframe (onload меняет размер → resize → alert) → exploit server. Сложная лаба, продвинутый навык.
-- ✅ PortSwigger: Reflected XSS with SVG markup (animatetransform onbegin, адаптация вектора под фильтр) — solved
-- ✅ PortSwigger: CSRF token duplicated in cookie (навязал csrf в cookie через CRLF + форму) — solved
-- ✅ PortSwigger: CSRF token not tied to session (свой валидный свежий токен в форму) — solved
-- ✅ PortSwigger: Username enumeration via different responses (Intruder: логин по разнице ответа/длины → брутфорс пароля) — solved
-- ✅ PortSwigger: 2FA simple bypass (переход на /my-account минуя ввод кода — пост-2FA страница не защищена) — solved
-- ✅ PortSwigger: 2FA broken logic (подмена username wiener→carlos + брутфорс кода → вход под carlos) — solved. Цепочка: логика + брутфорс.
-- ✅ PortSwigger: Broken brute-force protection IP block (Pitchfork чередование wiener/carlos + resource pool 1 concurrent) — solved. Урок: порядок-зависимые атаки требуют 1 поток.
-- ✅ PortSwigger: Password reset broken logic (подмена username в финальном запросе → смена пароля carlos) — solved
-- ✅ PortSwigger: Modifying serialized objects (b:0→b:1 admin в PHP-объекте cookie) — solved. Первая десериализация.
-- ✅ PortSwigger: Modifying serialized data types (i:0 + type juggling обход == токена + username=administrator) — solved. PHP loose comparison.
+- ✅ SSRF: механика, метаданные 169.254.169.254, защита (allowlist по финальному IP), blind SSRF
+- ✅ PortSwigger #1: Unprotected admin functionality (robots.txt) — solved
+- ✅ PortSwigger #2: Unprotected admin, unpredictable URL (JS recon) — solved
+- ✅ PortSwigger #3: User role controlled by request parameter (вертикаль) — solved
+- ✅ PortSwigger #4: User ID controlled by request parameter (IDOR, горизонталь) — solved
+- ✅ Различие руками: IDOR (объект, горизонталь) vs role-подмена (роль, вертикаль)
+- ✅ PortSwigger #5: Basic SSRF against local server — solved
+
+### Фаза 2 · Неделя 4 — SQL Injection
+- ✅ WHERE hidden data, login bypass (administrator'--), determine columns — solved
+- ✅ UNION: finding column with text (3 столбца, текстовый — 2-й) — solved
+- ✅ UNION: retrieving data from other tables (creds administrator) — solved. Первая кража данных.
+- ✅ Blind boolean (conditional responses) — Intruder Cluster bomb. Освоен Intruder.
+- ✅ Blind time-based (pg_sleep + Cluster bomb по времени) — solved.
+- ✅ Защита вглубь: параметризация + нюанс структурных частей (ORDER BY -> allowlist), ORM/raw, least privilege
+- ✅ Write-up SQLi -> writeups/sqli.md (detection через data-flow source->sink). Третий write-up.
+- ✅ Пробелы: CWE-иерархия (CWE-89 не CWE-74), data-flow (где SAST слепнет)
+
+### Фаза 2 · Неделя 5 — Command Injection + intro XSS
+- ✅ Command Injection: корень (ввод -> команда ОС), разделители (; | && $()), blind (sleep/OOB)
+- ✅ Защита: не звать shell / subprocess массив + shell=False (аналог параметризации), least power
+- ✅ OS command injection simple case (;whoami) — solved. Первый RCE.
+- ✅ Разбор: куда летит инъекция (код определяет: БД->SQLi, shell->cmd)
+- ✅ XSS-парадигма: инъекция в браузер ДРУГОГО юзера, три типа, экранирование по контексту
+- ✅ Reflected XSS into HTML, nothing encoded — solved. Первый XSS.
+- ✅ Stored XSS into HTML, nothing encoded — solved. Массовость + не нужно действие жертвы.
+- ✅ DOM XSS via location.search — solved. Три типа руками.
+
+### Фаза 2 · Неделя 6 — XSS вглубь
+- ✅ Impact: кража cookie, действия от имени жертвы; HttpOnly (блокирует ЧТЕНИЕ, не использование)
+- ✅ Обход фильтров: blocklist дырявый, event handlers вместо <script>, обфускация
+- ✅ CSP: script-src 'self', блок inline; unsafe-inline убивает; nonce/hash — замена
+- ✅ Экранирование по контексту: HTML-сущности vs JS (\"); вложенные контексты (</script>)
+- ✅ Парсинг: сервер собирает текст -> браузер (HTML-парсер ПЕРВЫМ, потом JS-движок)
+- ✅ Валидация (принять/отклонить) vs санитизация (очистить, DOMPurify)
+- ✅ Reflected XSS most tags/attributes blocked — solved. Цепочка: Intruder -> body+onresize -> iframe. Сложная.
+- ✅ Reflected XSS with SVG markup (animatetransform onbegin) — solved
+- ✅ Reflected XSS into JS string (</script> вырыв) — solved
+- ✅ Reflected XSS into attribute (вырыв из атрибута) — solved
+- ✅ Защита XSS целиком: экранирование по контексту + CSP + HttpOnly + валидация/санитизация
+- ✅ Write-up XSS -> writeups/xss.md. Четвёртый write-up.
+
+### Фаза 2 · Неделя 7 — Auth/сессии + CSRF + десериализация
+- ✅ CSRF: механика (браузер сам прикладывает cookie), SOP (отправить можно, прочитать ответ нельзя -> слепой)
+- ✅ Защита CSRF: токен (случайный, привязан к сессии) vs токен в localStorage+заголовок; связь с OAuth state
+- ✅ CRLF-инъекция: \r\n (%0d%0a) разбивает заголовки, внедрение Set-Cookie
+- ✅ Разбор сессий: server-side (cookie=ID) vs JWT (данные в токене, подпись != шифрование); браузер — курьер
+- ✅ CSRF no defenses (форма + автосабмит) — solved
+- ✅ CSRF token depends on method (POST->GET) — solved
+- ✅ CSRF token duplicated in cookie (навязал csrf через CRLF + форму) — solved
+- ✅ CSRF token tied to csrfKey (CRLF-цепочка: навязать свою валидную пару) — solved. Самая сложная CSRF.
+- ✅ CSRF token not tied to session (свой свежий токен) — solved. Токены обновляемые.
+- ✅ Username enumeration via different responses — solved
+- ✅ Timing-enumeration: логин по времени (хеширование bcrypt/argon2 медленное)
+- ✅ 2FA simple bypass (переход минуя ввод кода) — solved
+- ✅ 2FA broken logic (подмена username + брутфорс кода) — solved. Логика + брутфорс.
+- ✅ Broken brute-force protection IP block (Pitchfork + 1 concurrent) — solved. Порядок-зависимые -> 1 поток.
+- ✅ Password reset broken logic (подмена username) — solved. Корень = доверие подконтрольному вводу.
+- ✅ Десериализация: сериализация <-> объект, языко-специфичные форматы опасны, восстановление = выполнение кода
+- ✅ Modifying serialized objects (b:0->b:1 admin) — solved. Первая десериализация.
+- ✅ Modifying serialized data types (i:0 + type juggling обход ==) — solved. PHP == vs ===.
+- ⬜ Осталось: deserialization RCE (gadget chains, phpggc)
+
+### Веха — подготовка к трудоустройству
+- ✅ Mock-интервью: 6 блоков. Итог 3.3 -> 4.0/5 после закрытия 5 пробелов (SCA, 401, cookie/JWT, fix'ы, FP-триаж). Вердикт: ПОДАВАТЬ.
+- ✅ 3 резюме: МТС-стажёр, AppSec/DevSecOps, AppSec Engineer (честные, инфраструктура помечена «в процессе»)
+- ✅ Сопроводительное письмо (шаблон + под вакансию)
+- ✅ Отклики отправлены (МТС и др.)
+- ✅ Урок фильтрации вакансий: цель — стажёр/junior + ядро «веб-уязвимости»; пропускать «опыт 1-2 года», инфраструктуру, не-технические
+
+### Фаза 5 (старт раньше плана) — практика на живых целях (THM)
+- ✅ Осознание: лабы дают «названные» уязвимости, реальность — recon-навык (с чего начать)
+- ✅ recon-чеклист (notes/recon-checklist.md): mapping -> исходники -> fingerprint -> fuzzing -> классы -> privesc
+- ✅ TryHackMe Jr Penetration Tester (в процессе): Nmap, Metasploit, Search Skills, HTTP, Web Basics + intro (12 комнат)
+- ✅ Guided Pentest: Web — chaining (связка мелких уязвимостей в critical)
+- ✅ МАШИНА Pickle Rick — первая. recon -> креды (HTML+robots) -> RCE -> обход фильтров -> recon ФС -> privesc (sudo -l) -> 3 ингредиента
+- ✅ МАШИНА Basic Pentesting — вторая. nmap -> gobuster -> SMB (enum4linux -> staff.txt -> jan/kay) -> Hydra (jan) -> id_rsa kay -> ssh2john+john -> вход kay
+- ✅ Инструменты: nmap, gobuster/ffuf, enum4linux, smbclient, Hydra, John the Ripper, Metasploit
+- ✅ Сдвиг: уже внутри машины -> путь ИЗНУТРИ (recon ФС, ключи, privesc), не внешний брутфорс
+
+### Трекеры и артефакты
+- ✅ labs/portswigger.md — ~29 лаб по темам
+- ✅ labs/tryhackme.md — 12 комнат, 2 машины, инструменты
+- ✅ notes/recon-checklist.md — методология разведки
+
+---
+
+## Что дальше
+- ⬜ Deserialization RCE (gadget chains)
+- ⬜ Неделя 8: Security Misconfiguration + Crypto Failures + Insecure Design + STRIDE
+- ⬜ Экзамен Фазы 2
+- ⬜ Фаза 3 — безопасность API (BOLA, mass assignment) — релевантно вакансиям
+- ⬜ Фаза 4 — инструменты AppSec (Semgrep/ZAP/Nuclei/Trivy) + CI/CD/DevSecOps
+- 🔄 Параллельно: THM-машины + разбор чужих write-up
+- ⬜ Опционально: write-up по CSRF (5-й артефакт), пары vulnerable/fixed кода
