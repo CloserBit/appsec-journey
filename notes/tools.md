@@ -223,3 +223,11 @@ history; cat ~/.bash_history            # история команд (паро�
 # на GTFOBins для find:
 sudo find . -exec /bin/sh \; -quit    # → root shell
 ```
+
+## Reverse Shell
+
+### revshells.com — генератор reverse shell (закладка!)
+https://www.revshells.com/
+Выбираешь тип shell (bash/python/nc/php/perl...) + вводишь свой IP:порт → готовая
+команда для вставки. Не надо составлять вручную. Есть listener-команды тоже.
+Механика: ЖЕРТВА подключается к АТАКУЮЩЕМУ (обходит firewall — исходящие разрешены).
