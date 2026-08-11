@@ -1,8 +1,8 @@
 # appsec-journey
 
-Мой путь подготовки на позицию **AppSec Engineer**: конспекты, secure-coding,
-write-up'ы уязвимостей, автоматизация и практика на живых целях. Репозиторий
-растёт по мере прохождения роадмапа.
+Мой путь в **Application Security → Penetration Testing**: конспекты, secure-coding,
+write-up'ы уязвимостей, автоматизация и практика на живых целях (THM). Вход целю
+через AppSec/security-роли, пентест-навыки коплю параллельно.
 
 ## Цель
 Уверенно находить, эксплуатировать и **чинить** топ-уязвимости веб-приложений и API;
@@ -46,9 +46,12 @@ BSIMM: модель зрелости (обзорно)
       — осталось: deserialization RCE, misconfiguration, crypto failures
 - [ ] Фаза 3 — безопасность API
 - [ ] Фаза 4 — инструменты AppSec, SSDLC/DevSecOps, стандарты
-- [~] Фаза 5 — практика на живых целях: TryHackMe (Jr Penetration Tester, в процессе)
+- [~] Фаза 5 — практика на живых целях: TryHackMe (Jr Penetration Tester, в процессе):
+      ✅ Linux privesc (10 векторов: SUID, sudo, cron, PATH, kernel, .so injection, NFS и др.)
+      ✅ 8+ машин самостоятельно (web RCE, cloud, pivoting, business logic)
+      ✅ Reverse shell, pivoting (chisel), command injection, SSTI, deserialization RCE на живых целях
 
 ## Артефакты
 - **Write-up'ы:** JWT (signature bypass, sensitive data), SQLi, XSS — с root cause, PoC, CWE, fix
-- **Практика:** ~33 лаборатории PortSwigger · 10 комнат TryHackMe
+- **Практика:** ~29 лабораторий PortSwigger · ~19 комнат TryHackMe (8+ самостоятельных машин)
 - **Скрипты:** автоматизация IDOR-теста (login → перебор id)
