@@ -1,6 +1,8 @@
 # ROADMAP — appsec-journey
 
-Полный план подготовки на AppSec Engineer (~4 месяца, 15 ч/нед).
+План подготовки: AppSec-вход → пентест (гибрид). ~4-6 месяцев.
+Вход целю через AppSec/security-стажировки (Фазы 1-4), пентест-навыки коплю
+параллельно на живых целях (THM/HTB) — Фаза 5 идёт СКВОЗНО, не в конце.
 Карта целиком; ежедневные детали — в [PROGRESS.md](./PROGRESS.md).
 
 **Легенда:** ✅ закрыто · 🔄 в процессе · ⬜ впереди
@@ -49,16 +51,23 @@
 - ⬜ Мини-проект (ключевой): уязвимое приложение + CI-пайплайн SAST+DAST+SCA
 - ⬜ 🎫 Экзамен Фазы 4
 
-## Фаза 5 — Пентест-практика и портфель
-- ⬜ Неделя 14 — TryHackMe (web-путь), добить PortSwigger advanced
-- ⬜ Неделя 15 — HackTheBox web-модули/машины
-- ⬜ Неделя 16 — Чтение фреймворков (FastAPI/Flask, React/Vue DOM XSS); финальный портфель
-- ⬜ 🎫 Финал: mock-интервью
+## Фаза 5 — Пентест-практика и портфель (СКВОЗНАЯ, активна с Фазы 2)
+- ✅ TryHackMe Jr Penetration Tester path (в процессе): recon, Nmap, Metasploit
+- ✅ Linux privilege escalation — полная карта (10 векторов)
+- ✅ 8+ машин самостоятельно (web RCE, cloud, pivoting, business logic, SSTI)
+- ✅ Инструменты: reverse shell, chisel (pivoting), LinPEAS, Hydra, John
+- ✅ Write-up'ы машин (Infinity Pool, Beach Bar)
+- 🔄 Поддержание стрика THM + продвижение по лигам (соревновательный драйвер)
+- ⬜ Windows + Active Directory (пробел): Blue, Windows PrivEsc, AD-комнаты
+- ⬜ HackTheBox: Starting Point → web-модули
+- ⬜ eJPT (среднесрочно) — входной пентест-сертификат
+- ⬜ 🎫 Финал: mock-интервью (пентест-формат)
 
 ---
 
 ## Сквозные треки
 - 🔄 Secure SDLC (рамка задана, применяется на каждой теме)
 - 🔄 CWE-маппинг (цель: покрыть CWE Top 25)
+- 🔄 THM стрик/лиги — соревновательный драйвер, поддерживать регулярность практики
 - ⬜ Secure coding Python (vulnerable + fixed)
 - ⬜ Стандарты (ASVS/Cheat Sheets в работе, обзор MITRE/BSIMM)
