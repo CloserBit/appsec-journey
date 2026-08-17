@@ -8,14 +8,14 @@
 ---
 
 ## Текущая позиция
-**Фаза 2 почти закрыта + старт практики на живых целях (THM).**
-Закрыто: BAC/IDOR, SQLi, command injection, XSS (полностью), CSRF, auth failures,
-десериализация (базовая). Пройден mock-интервью (вердикт «подавать»), собраны 3 резюме
-под разные вакансии, отклики отправлены (МТС и др.).
-🔄 Сейчас: TryHackMe Jr Penetration Tester — recon-навык на неназванных целях
-(2 машины решены самостоятельно) + добор теории по плану.
-Осталось до закрытия Фазы 2: deserialization RCE (gadget chains),
-Неделя 8 (misconfiguration / crypto failures / insecure design + STRIDE), экзамен Фазы 2.
+**Активная практика на живых целях (THM) + подготовка к трудоустройству.**
+Трек: AppSec-вход → пентест (пентест-навыки коплю параллельно).
+Закрыто: костяк веб-уязвимостей (Фаза 2), Linux privilege escalation (10 векторов),
+8+ машин самостоятельно (включая многоступенчатый pivoting).
+🔄 Сейчас: TryHackMe Jr Penetration Tester path (Nmap, Metasploit) + упаковка портфеля.
+Отклики на AppSec-стажировки отправлены (Астра, hh.ru), резюме под AppSec готово + 2 write-up машин.
+Осталось хвостами: deserialization RCE (gadget chains), Неделя 8 (misconfig/crypto/STRIDE),
+экзамен Фазы 2, Фаза 3 (API), Фаза 4 (SAST/DAST-инструменты).
 
 ---
 
