@@ -28,6 +28,11 @@
 - ✅ 3 резюме (МТС-стажёр / DevSecOps / AppSec Engineer) + сопроводительное
 - ✅ Старт практики на живых целях: TryHackMe (12 комнат, 2 самостоятельные машины)
 - ✅ recon-чеклист + трекеры лаб (labs/)
+- ✅ Linux privilege escalation — полная карта (10 векторов), конспект notes/16-linux-privesc.md
+- ✅ 8+ машин самостоятельно (Beach Bar, Ponzi, Infinity Pool, SSTI, Zip Slip и др.)
+- ✅ Навыки: reverse shell, pivoting (chisel), SSTI, business logic / race condition, YAML RCE
+- ✅ 2 write-up машин (Infinity Pool, Beach Bar) — цепочки с CWE и защитой
+- ✅ Резюме под AppSec + сопроводительное + hh-профиль, отклики отправлены
 
 ---
 
@@ -149,6 +154,18 @@
 - ✅ Инструменты: nmap, gobuster/ffuf, enum4linux, smbclient, Hydra, John the Ripper, Metasploit
 - ✅ Сдвиг: уже внутри машины -> путь ИЗНУТРИ (recon ФС, ключи, privesc), не внешний брутфорс
 
+### Фаза 5 (продолжение) — Hacker Holidays + privesc
+- ✅ Linux PrivEsc + Arena: полная карта векторов (SUID, writable passwd, sudo escaping,
+     cron, PATH hijacking, kernel/DirtyCow, stored passwords, shadow cracking, .so injection, NFS)
+- ✅ МАШИНА Beach Bar — YAML deserialization RCE → reverse shell (base64) → пароль в ps aux → root
+- ✅ МАШИНА Ponzi Portfolio — business logic, race condition (single-packet) → накрутка баланса
+- ✅ МАШИНА Infinity Pool — pivoting: command injection → chisel → watchtower → FreePBX → automation RCE от root
+- ✅ МАШИНА SSTI — Node.js template injection → RCE → disk-группа privesc (debugfs)
+- ✅ МАШИНА Zip Slip — path traversal через имя файла в архиве
+- ✅ Инструменты добавлены: chisel (pivoting), LinEnum/LinPEAS, revshells.com, base64-обёртка
+- ✅ Write-up'ы: writeups/infinity-pool.md, writeups/beach-bar.md
+- 🔄 THM: поддержание стрика + продвижение по лигам (соревновательный драйвер)
+
 ### Трекеры и артефакты
 - ✅ labs/portswigger.md — ~29 лаб по темам
 - ✅ labs/tryhackme.md — 12 комнат, 2 машины, инструменты
@@ -157,10 +174,18 @@
 ---
 
 ## Что дальше
-- ⬜ Deserialization RCE (gadget chains)
-- ⬜ Неделя 8: Security Misconfiguration + Crypto Failures + Insecure Design + STRIDE
-- ⬜ Экзамен Фазы 2
+Под AppSec-вход (вакансии, куда откликнулся):
+- ⬜ Фаза 4 — SAST (Semgrep на своём коде) + ZAP: превратить «готов осваивать» в «начал»
 - ⬜ Фаза 3 — безопасность API (BOLA, mass assignment) — релевантно вакансиям
-- ⬜ Фаза 4 — инструменты AppSec (Semgrep/ZAP/Nuclei/Trivy) + CI/CD/DevSecOps
-- 🔄 Параллельно: THM-машины + разбор чужих write-up
-- ⬜ Опционально: write-up по CSRF (5-й артефакт), пары vulnerable/fixed кода
+- ⬜ Хвосты Фазы 2: deserialization RCE, Неделя 8 (misconfig/crypto/STRIDE), экзамен Фазы 2
+
+Под пентест-трек (параллельно, драйвер — стрик/лиги THM):
+- 🔄 THM Jr Penetration Tester path: Nmap, Metasploit (углубить recon + фреймворк)
+- 🔄 Поддержание стрика THM + продвижение по лигам (соревновательная мотивация)
+- ⬜ Windows + Active Directory (пробел, обязателен для пентеста): Blue, Windows PrivEsc
+- ⬜ eJPT (среднесрочно) — входной пентест-сертификат
+
+Упаковка (поддерживать актуальным):
+- 🔄 Write-up'ы по пройденным машинам (2 готовы, добить TakeOver/Ponzi/SSTI)
+- ⬜ Конспекты: pivoting/chisel, business logic, разбить 17-ssti (вынести disk/reverse shell)
+- ⬜ Опционально: пары vulnerable/fixed кода
